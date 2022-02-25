@@ -8,7 +8,7 @@ function Cube( gl, vertexShaderId, fragmentShaderId ) {
     var vertShdr = vertexShaderId || "Cube-vertex-shader";
     var fragShdr = fragmentShaderId || "Cube-fragment-shader";
 
-    this.program = initShaders(gl, vertShdr, fragShdr);
+    var program = initShaders(gl, vertShdr, fragShdr);
 
     if ( this.program < 0 ) {
         alert( "Error: Cube shader pipeline failed to compile.\n\n" +
@@ -73,7 +73,11 @@ function Cube( gl, vertexShaderId, fragmentShaderId ) {
         20, 21, 22,     20, 22, 23,   // left
       ];
 
-    
+    //aPosition logic
+    this.positions.attributeLoc = gl.getAttribLocation(program, "aPosition" );
+    gl.enableVertexAttribArray( this.positions.attributeLoc );
+    this.positions.numComponents = 3;
+
     this.positions.buffer = gl.createBuffer();
     gl.bindBuffer( gl.ARRAY_BUFFER, this.positions.buffer );
     gl.bufferData( gl.ARRAY_BUFFER, new Float32Array(this.positions), gl.STATIC_DRAW );
@@ -82,25 +86,21 @@ function Cube( gl, vertexShaderId, fragmentShaderId ) {
     gl.bindBuffer( gl.ELEMENT_ARRAY_BUFFER, this.indices.buffer );
     gl.bufferData( gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indices), gl.STATIC_DRAW );
 
-    this.positions.attributeLoc = gl.getAttribLocation( this.program, "aPosition" );
-    gl.enableVertexAttribArray( this.positions.attributeLoc );
-    this.positions.numComponents = 3;
-    console.log(gl.getError());
+    //Rotation Logic
+    MV = gl.getUniformLocation(program, "MV");
+    this.MV = mat4();
 
     this.render = function () {
-        var offset = 0;
-        const type = gl.UNSIGNED_SHORT;
-        const vertexCount = this.indices.length;
-        gl.useProgram( this.program );
+        gl.useProgram(program );
         gl.bindBuffer( gl.ARRAY_BUFFER, this.positions.buffer );
         gl.vertexAttribPointer( this.positions.attributeLoc, this.positions.numComponents,
             gl.FLOAT, gl.FALSE, 0, 0 );
+
+        //rotation logic
+        gl.uniformMatrix4fv(MV, false, flatten(this.MV));
  
         gl.bindBuffer( gl.ELEMENT_ARRAY_BUFFER, this.indices.buffer );
-
-        //draw
-        
-        gl.drawElements( gl.TRIANGLES, vertexCount, type, offset );
+        gl.drawElements( gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0);
         
         
     }

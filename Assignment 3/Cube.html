@@ -3,25 +3,28 @@
     <script type="text/javascript" src="initShaders.js"></script>
     <script type="text/javascript" src="Cube.js"></script>
     <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="MV.js"></script>
 
     <script id="Cube-vertex-shader" type="x-shader/x-vertex">#version 300 es
         in vec4 aPosition;
-        
+        uniform mat4 MV;
+        out vec4 vColor;
         void main()
         {
             gl_PointSize = 3.0;
-            gl_Position = aPosition * 0.5;
+            gl_Position = MV * (aPosition - vec4(.5,.5,.5,0));
+            vColor = aPosition;
         }
     </script>
 
     <script id="Cube-fragment-shader" type="x-shader/x-fragment">#version 300 es
         precision highp float;
-
+        in vec4 vColor;
         out vec4 fColor;
 
         void main()
         {
-            fColor = vec4(0, 0, 1.0, 1.0);
+            fColor = vColor;
         }
     </script>
 </head>
