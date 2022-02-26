@@ -2,7 +2,7 @@ angle = 0;
 function init() {
     var canvas = document.getElementById("webgl-canvas");
     gl = canvas.getContext("webgl2");
-    gl.clearColor(1, 1, 1, 1);
+    gl.clearColor(0, 0, 0, 1);
     gl.enable(gl.DEPTH_TEST);
     Cube = new Cube(gl);
     render();
