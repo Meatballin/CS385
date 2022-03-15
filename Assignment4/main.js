@@ -42,6 +42,15 @@ function init() {
     d = 2 * (Earth.orbit + Moon.orbit + Moon.radius + 5000);
     far = near + d;
     
+     //Calculation of viewing frustrum
+     var aspect = (canvas.clientWidth / canvas.clientHeight);
+     var angle = Math.atan((d/2) / (near + (d/2)));
+     var fov = 2 * (angle);
+ 
+     Sun.P = perspective(fov, aspect, near, far);
+     Earth.P = perspective(fov, aspect, near, far);
+     Moon.P = perspective(fov, aspect, near, far);
+ 
     requestAnimationFrame(render);
 }
 
