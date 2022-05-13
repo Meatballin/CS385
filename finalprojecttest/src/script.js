@@ -41,16 +41,28 @@ const post = new THREE.Mesh(cylinderObject,cylinderMaterial);
 post.rotation.x = 120
 scene.add(post);
 
+//Outer Ring Code
+const outerRingObject = new THREE.TorusGeometry(15, 1, 3, 86, 10);
+const outerRingObjectMaterial = new THREE.MeshStandardMaterial();
+outerRingObjectMaterial.color = new THREE.Color(0xffffff);
+outerRingObjectMaterial.roughness = .2;
+outerRingObjectMaterial.metalness = .7
+
+//Add to scene
+const outerRing = new THREE.Mesh(outerRingObject, outerRingObjectMaterial);
+post.add(outerRing);
+
 //Inner Ring Code
-const innerRingObject = new THREE.TorusGeometry(15, 1, 3, 86, 10);
+const innerRingObject = new THREE.TorusGeometry(13.5, 1, 3, 86, 10);
 const innerRingObjectMaterial = new THREE.MeshStandardMaterial();
 innerRingObjectMaterial.color = new THREE.Color(0xffffff);
 innerRingObjectMaterial.roughness = .2;
-innerRingObjectMaterial.metalness = .7
+innerRingObjectMaterial.metalness = .7;
 
 //Add to scene
-const innerRing = new THREE.Mesh(innerRingObject, innerRingObjectMaterial);
-post.add(innerRing);
+const innerRing = new THREE.Mesh(innerRingObject,innerRingObjectMaterial);
+innerRing.rotation.x = 80
+outerRing.add(innerRing);
 
 // Lights =================================================================
 
@@ -145,6 +157,7 @@ const tick = () =>
     post.rotateOnWorldAxis(new THREE.Vector3(0,1,0), .005) 
     const elapsedTime = clock.getElapsedTime()
     
+    innerRing.rotation.x += .03
     // Update objects
 
 
