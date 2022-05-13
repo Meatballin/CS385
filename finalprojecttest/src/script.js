@@ -30,9 +30,9 @@ const loader = new GLTFLoader()
 
 //Cylinder Code (post for gyroscope) =====================================
 
-const cylinderObject = new THREE.CylinderGeometry(.5, .5, 30, 32);
+const cylinderObject = new THREE.CylinderGeometry(.5, .5, 40, 32);
 const cylinderMaterial = new THREE.MeshStandardMaterial();
-cylinderMaterial.color = new THREE.Color(0xffffff)
+cylinderMaterial.color = new THREE.Color(0xffffff);
 cylinderMaterial.roughness = .2;
 cylinderMaterial.metalness = .7;
 
@@ -41,6 +41,16 @@ const post = new THREE.Mesh(cylinderObject,cylinderMaterial);
 post.rotation.x = 120
 scene.add(post);
 
+//Inner Ring Code
+const innerRingObject = new THREE.TorusGeometry(15, 1, 3, 86, 10);
+const innerRingObjectMaterial = new THREE.MeshStandardMaterial();
+innerRingObjectMaterial.color = new THREE.Color(0xffffff);
+innerRingObjectMaterial.roughness = .2;
+innerRingObjectMaterial.metalness = .7
+
+//Add to scene
+const innerRing = new THREE.Mesh(innerRingObject, innerRingObjectMaterial);
+post.add(innerRing);
 
 // Lights =================================================================
 
