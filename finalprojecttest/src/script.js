@@ -2,11 +2,18 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+//Gyroscope Notes
+// NEED: Skinny Cylinder for pole that it stands on
+// Need 3 ring-type objects
+// One Disk type object in middle of gyroscope that is perpendicular to the
+// flat cylinder object
 
 //Texture reference
 const textureLoader = new THREE.TextureLoader();
 
-const normalTexture = textureLoader.load('/textures/test.png');
+// const normalTexture = textureLoader.load('/textures/test.png');
 
 // Debug
 const gui = new dat.GUI()
@@ -17,23 +24,27 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-// Objects
-const geometry = new THREE.TorusGeometry( .5, .1, 20, 100);
+//Gyroscope Model
+const loader = new GLTFLoader()
 
-// Materials
+scene.background = new THREE.Color(0xFFFFFF)
+// // Objects
+// const geometry = new THREE.TorusGeometry( .5, .1, 20, 100);
 
-const material = new THREE.MeshStandardMaterial()
-//Lavender color
-material.color = new THREE.Color(0x292929)
-material.roughness = .2
-material.metalness = .7
+// // Materials
 
-material.normalMap = normalTexture;
+// const material = new THREE.MeshStandardMaterial()
+// //Lavender color
+// material.color = new THREE.Color(0x292929)
+// material.roughness = .2
+// material.metalness = .7
+
+// material.normalMap = normalTexture;
 
 
 // Mesh
-const sphere = new THREE.Mesh(geometry,material)
-scene.add(sphere)
+// const sphere = new THREE.Mesh(geometry,material)
+// scene.add(sphere)
 
 // Lights
 
@@ -92,7 +103,7 @@ window.addEventListener('resize', () =>
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 0
 camera.position.y = 0
-camera.position.z = 2
+camera.position.z =10
 scene.add(camera)
 
 // Controls
@@ -126,7 +137,7 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
     
     // Update objects
-    sphere.rotation.y = 1 * elapsedTime
+    // sphere.rotation.y = 1 * elapsedTime
 
     
 
