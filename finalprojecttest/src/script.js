@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { CylinderGeometry, Material } from 'three';
 
 //Gyroscope Notes
 // NEED: Skinny Cylinder for pole that it stands on
@@ -27,26 +28,21 @@ const scene = new THREE.Scene()
 //Gyroscope Model
 const loader = new GLTFLoader()
 
-scene.background = new THREE.Color(0xFFFFFF)
-// // Objects
-// const geometry = new THREE.TorusGeometry( .5, .1, 20, 100);
+//Cylinder Code (post for gyroscope) =====================================
 
-// // Materials
+const cylinderObject = new THREE.CylinderGeometry(.5, .5, 30, 32);
+const cylinderMaterial = new THREE.MeshStandardMaterial();
+cylinderMaterial.color = new THREE.Color(0xffffff)
+cylinderMaterial.roughness = .2;
+cylinderMaterial.metalness = .7;
 
-// const material = new THREE.MeshStandardMaterial()
-// //Lavender color
-// material.color = new THREE.Color(0x292929)
-// material.roughness = .2
-// material.metalness = .7
-
-// material.normalMap = normalTexture;
+//Add to scene and rotate
+const post = new THREE.Mesh(cylinderObject,cylinderMaterial);
+post.rotation.x = 120
+scene.add(post);
 
 
-// Mesh
-// const sphere = new THREE.Mesh(geometry,material)
-// scene.add(sphere)
-
-// Lights
+// Lights =================================================================
 
 const pointLight = new THREE.PointLight(0xffffff, 2)
 pointLight.position.x = 0
@@ -55,20 +51,20 @@ pointLight.position.z = 0
 scene.add(pointLight)
 
 const light1 = gui.addFolder('Light 1')
-light1.add(pointLight.position, 'y').min(-3).max(3).step(0.01)
-light1.add(pointLight.position, 'x').min(-6).max(6).step(0.01)
-light1.add(pointLight.position, 'z').min(-3).max(3).step(0.01)
+light1.add(pointLight.position, 'y').min(-10).max(10).step(0.01)
+light1.add(pointLight.position, 'x').min(-10).max(10).step(0.01)
+light1.add(pointLight.position, 'z').min(-10).max(10).step(0.01)
 light1.add(pointLight, 'intensity').min(0).max(10).step(0.01)
 
 const pointLight2 = new THREE.PointLight(0xffffff, 2)
-pointLight2.position.set(1.08,.09,-1.32)
-pointLight2.intensity = 5
+pointLight2.position.set(0.02, 10,20)
+pointLight2.intensity = 1
 scene.add(pointLight2)
 
 const light2 = gui.addFolder('Light 2')
-light2.add(pointLight2.position, 'y').min(-3).max(3).step(0.01)
-light2.add(pointLight2.position, 'x').min(-6).max(6).step(0.01)
-light2.add(pointLight2.position, 'z').min(-3).max(3).step(0.01)
+light2.add(pointLight2.position, 'y').min(-10).max(10).step(0.01)
+light2.add(pointLight2.position, 'x').min(-10).max(10).step(0.01)
+light2.add(pointLight2.position, 'z').min(-10).max(10).step(0.01)
 light2.add(pointLight2, 'intensity').min(0).max(10).step(0.01)
 
 const pointLightHelper = new THREE.PointLightHelper(pointLight2, 1)
@@ -100,10 +96,10 @@ window.addEventListener('resize', () =>
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 1000)
 camera.position.x = 0
 camera.position.y = 0
-camera.position.z =10
+camera.position.z = 60
 scene.add(camera)
 
 // Controls
@@ -114,10 +110,13 @@ scene.add(camera)
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
+
     canvas: canvas,
-    alpha: true
+    alpha: true,
+    antialias: true
     
 })
+
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
@@ -128,24 +127,25 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
 
-const clock = new THREE.Clock()
+const clock = new THREE.Clock();
 
 const tick = () =>
 {
-    
-
+    //Rotate initial post of gyroscope around world Y-Axis at a slow speed
+    post.rotateOnWorldAxis(new THREE.Vector3(0,1,0), .005) 
     const elapsedTime = clock.getElapsedTime()
     
     // Update objects
-    // sphere.rotation.y = 1 * elapsedTime
 
-    
 
     // Update Orbital Controls
     // controls.update()
 
     // Render
+    
     renderer.render(scene, camera)
+    
+    
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
