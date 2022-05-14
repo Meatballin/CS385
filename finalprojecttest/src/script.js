@@ -66,11 +66,24 @@ innerRing.rotation.x = 80
 outerRing.add(innerRing);
 
 //Import Tron Disk
-loader.load('/Assets/scene.gltf', function (gltf){
+
+loader.load('/Assets/scene.gltf', handle_load);
+var mesh;
+function handle_load(gltf){
+    mesh = gltf.scene;
     gltf.scene.scale.set(13,13,13);
-    gltf.scene.rotation.z = 190;
-    outerRing.add(gltf.scene);
-});
+    gltf.scene.rotateOnWorldAxis(new THREE.Vector3(0,0,1), 190)
+    outerRing.add(mesh);
+}
+
+function Animate(){
+    if(mesh)
+    {
+        mesh.rotation.y += .05
+    }
+}
+    
+    
 
 
 
@@ -168,10 +181,11 @@ const clock = new THREE.Clock();
 const tick = () =>
 {
     //Rotate initial post of gyroscope around world Y-Axis at a slow speed
-    post.rotateOnWorldAxis(new THREE.Vector3(0,1,0), .005) 
+    post.rotateOnWorldAxis(new THREE.Vector3(0,1,0), .01) 
     const elapsedTime = clock.getElapsedTime()
     
     innerRing.rotation.x += .03
+    
     
     // Update objects
 
@@ -187,6 +201,7 @@ const tick = () =>
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
+    Animate();
 }
 
 tick()
