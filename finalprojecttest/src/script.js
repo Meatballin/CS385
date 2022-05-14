@@ -5,6 +5,7 @@ import * as dat from 'dat.gui'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { CylinderGeometry, Material } from 'three';
 
+
 //Gyroscope Notes
 // NEED: Skinny Cylinder for pole that it stands on
 // Need 3 ring-type objects
@@ -64,6 +65,15 @@ const innerRing = new THREE.Mesh(innerRingObject,innerRingObjectMaterial);
 innerRing.rotation.x = 80
 outerRing.add(innerRing);
 
+//Import Tron Disk
+loader.load('/Assets/scene.gltf', function (gltf){
+    gltf.scene.scale.set(13,13,13);
+    gltf.scene.rotation.z = 190;
+    outerRing.add(gltf.scene);
+});
+
+
+
 // Lights =================================================================
 
 const pointLight = new THREE.PointLight(0xffffff, 2)
@@ -122,6 +132,10 @@ const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 10
 camera.position.x = 0
 camera.position.y = 0
 camera.position.z = 60
+const mainCamera = gui.addFolder('Main Camera')
+mainCamera.add(camera.position, 'x').step(.1)
+mainCamera.add(camera.position, 'y').step(.1)
+mainCamera.add(camera.position, 'z').step(.1)
 scene.add(camera)
 
 // Controls
@@ -158,6 +172,7 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
     
     innerRing.rotation.x += .03
+    
     // Update objects
 
 

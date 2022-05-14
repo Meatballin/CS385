@@ -1,0 +1,317 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 2786,
+      "max": [
+        0.9297240972518921,
+        0.9297240972518921,
+        -1.134806752204895
+      ],
+      "min": [
+        -0.9297240972518921,
+        -0.9297240972518921,
+        -2.0074729919433594
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 33432,
+      "componentType": 5126,
+      "count": 2786,
+      "max": [
+        1.0,
+        0.986906886100769,
+        1.0
+      ],
+      "min": [
+        -0.986906886100769,
+        -0.9469321370124817,
+        -0.9944921731948853
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2786,
+      "max": [
+        1.0,
+        1.0000630617141724
+      ],
+      "min": [
+        0.0,
+        0.011014629155397415
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 8022,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 66864,
+      "componentType": 5126,
+      "count": 1396,
+      "max": [
+        0.9999999403953552,
+        1.0,
+        -1.2616883516311646
+      ],
+      "min": [
+        -1.0,
+        -0.9999999403953552,
+        -1.8805913925170898
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 83616,
+      "componentType": 5126,
+      "count": 1396,
+      "max": [
+        0.998360276222229,
+        0.9999884963035583,
+        0.9869226217269897
+      ],
+      "min": [
+        -0.9983598589897156,
+        -0.9983595013618469,
+        -0.9869346618652344
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 22288,
+      "componentType": 5126,
+      "count": 1396,
+      "max": [
+        1.0,
+        0.668272852897644
+      ],
+      "min": [
+        0.0,
+        0.1148519217967987
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 32088,
+      "componentType": 5125,
+      "count": 4224,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "GoldenSushi (https://sketchfab.com/andrez.remi)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/disk-bbeee57ef9dd4116a4d399c8ce561c55",
+      "title": "Disk"
+    },
+    "generator": "Sketchfab-12.66.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 48984,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 33456,
+      "byteOffset": 48984,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 100368,
+      "byteOffset": 82440,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 182808,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "black_metal",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.00476031,
+          0.00476031,
+          0.00476031,
+          1.0
+        ],
+        "metallicFactor": 0.29355836054210827
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0.2469822525577686,
+        0.6431851149659079,
+        0.6879961544086022
+      ],
+      "name": "neon",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.45551952856014577,
+          0.8405424344119471,
+          0.9117889721365602,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.8040408205773457
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Cylinder_black metal_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cylinder_neon_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "d765f7e66d8c40cdb2d1bdcd53e8bdd6.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4,
+        5
+      ],
+      "matrix": [
+        -4.371139006309477e-06,
+        99.99999999999991,
+        -1.1102230246251565e-14,
+        0.0,
+        4.371139011860592e-06,
+        1.9984014443252818e-13,
+        99.99999999999991,
+        0.0,
+        22.05903625488277,
+        9.642311393776543e-07,
+        -9.642311381531318e-07,
+        0.0,
+        34.6578254699707,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Cylinder"
+    },
+    {
+      "mesh": 0,
+      "name": "Cylinder_black metal_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Cylinder_neon_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
