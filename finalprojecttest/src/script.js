@@ -14,6 +14,12 @@ import { CylinderGeometry, Material } from 'three';
 
 //Texture reference
 const textureLoader = new THREE.TextureLoader();
+const tilesBaseColor = textureLoader.load('/Textures/Sci_fi_Metal_Panel_006_basecolor.jpg');
+const tilesNormalMap = textureLoader.load('/Textures/Sci_fi_Metal_Panel_006_normal.jpg');
+const tilesHeightMap = textureLoader.load('/Textures/Sci_fi_Metal_Panel_006_height.png');
+const tilesRoughnessMap = textureLoader.load('/Textures/Sci_fi_Metal_Panel_006_roughness.jpg');
+const tilesAmbientOcclusionMap = textureLoader.load('/Textures/Sci_fi_Metal_Panel_006_ambientOcclusion.jpg');
+const tilesMetallic = textureLoader.load('/Textures/Sci_fi_Metal_Panel_006_metallic.jpg');
 
 // const normalTexture = textureLoader.load('/textures/test.png');
 
@@ -32,8 +38,21 @@ const loader = new GLTFLoader()
 //Cylinder Code (post for gyroscope) =====================================
 
 const cylinderObject = new THREE.CylinderGeometry(.5, .5, 40, 32);
-const cylinderMaterial = new THREE.MeshStandardMaterial();
-cylinderMaterial.color = new THREE.Color(0xffffff);
+const cylinderMaterial = new THREE.MeshStandardMaterial(
+    {
+        map: tilesBaseColor,
+        normalMap: tilesNormalMap,
+        roughnessMap: tilesRoughnessMap,
+        roughness: 0.5,
+        aoMap: tilesAmbientOcclusionMap,
+        metalnessMap: tilesMetallic,
+        metalness: 1
+    
+    });
+
+    
+
+cylinderMaterial.color = new THREE.Color(0xC1C1FF);
 cylinderMaterial.roughness = .2;
 cylinderMaterial.metalness = .7;
 
@@ -45,7 +64,8 @@ scene.add(post);
 //Outer Ring Code
 const outerRingObject = new THREE.TorusGeometry(15, 1, 3, 86, 10);
 const outerRingObjectMaterial = new THREE.MeshStandardMaterial();
-outerRingObjectMaterial.color = new THREE.Color(0xffffff);
+
+outerRingObjectMaterial.color = new THREE.Color(0x79EAFA);
 outerRingObjectMaterial.roughness = .2;
 outerRingObjectMaterial.metalness = .7
 
@@ -56,7 +76,8 @@ post.add(outerRing);
 //Inner Ring Code
 const innerRingObject = new THREE.TorusGeometry(13.5, 1, 3, 86, 10);
 const innerRingObjectMaterial = new THREE.MeshStandardMaterial();
-innerRingObjectMaterial.color = new THREE.Color(0xffffff);
+    
+innerRingObjectMaterial.color = new THREE.Color(0x020606);
 innerRingObjectMaterial.roughness = .2;
 innerRingObjectMaterial.metalness = .7;
 
@@ -89,9 +110,9 @@ function Animate(){
 
 // Lights =================================================================
 
-const pointLight = new THREE.PointLight(0xffffff, 2)
+const pointLight = new THREE.PointLight(0xffffff, 4.57)
 pointLight.position.x = 0
-pointLight.position.y = 15
+pointLight.position.y = 10
 pointLight.position.z = 0
 scene.add(pointLight)
 
@@ -101,8 +122,8 @@ light1.add(pointLight.position, 'x').min(-10).max(10).step(0.01)
 light1.add(pointLight.position, 'z').min(-10).max(10).step(0.01)
 light1.add(pointLight, 'intensity').min(0).max(10).step(0.01)
 
-const pointLight2 = new THREE.PointLight(0xffffff, 2)
-pointLight2.position.set(0.02, 10,20)
+const pointLight2 = new THREE.PointLight(0xffffff, 1)
+pointLight2.position.set(.02, -10,20)
 pointLight2.intensity = 1
 scene.add(pointLight2)
 
@@ -112,8 +133,10 @@ light2.add(pointLight2.position, 'x').min(-10).max(10).step(0.01)
 light2.add(pointLight2.position, 'z').min(-10).max(10).step(0.01)
 light2.add(pointLight2, 'intensity').min(0).max(10).step(0.01)
 
-const pointLightHelper = new THREE.PointLightHelper(pointLight2, 1)
-scene.add(pointLightHelper)
+const pointLightHelper1 = new THREE.PointLightHelper(pointLight, 1)
+const pointLightHelper2 = new THREE.PointLightHelper(pointLight2, 1)
+scene.add(pointLightHelper1)
+scene.add(pointLightHelper2)
 /**
  * Sizes
  */
@@ -144,7 +167,7 @@ window.addEventListener('resize', () =>
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 1, 1000)
 camera.position.x = 0
 camera.position.y = 0
-camera.position.z = 60
+camera.position.z = 80
 const mainCamera = gui.addFolder('Main Camera')
 mainCamera.add(camera.position, 'x').step(.1)
 mainCamera.add(camera.position, 'y').step(.1)
@@ -181,7 +204,7 @@ const clock = new THREE.Clock();
 const tick = () =>
 {
     //Rotate initial post of gyroscope around world Y-Axis at a slow speed
-    post.rotateOnWorldAxis(new THREE.Vector3(0,1,0), .01) 
+    post.rotateOnWorldAxis(new THREE.Vector3(0,1,0), .025) 
     const elapsedTime = clock.getElapsedTime()
     
     innerRing.rotation.x += .03
